@@ -1,19 +1,47 @@
 <!DOCTYPE html>
 html(lang="en")
 	include _head.jade
-	body
-		.page-wrapper
-			include _nav.jade
+	body(data-spy='scroll' data-target='#topNav' data-offset='50')
+		include _nav.jade
+		.container
 			.content-wrapper
 				.main-content
-					section
-						h2.title-section Services
-						.service
-							h4.title Service Title
-						.service
-							h4.title Service Title
-							p 
-						.service
-							h4.title Service Title
-							p 
+					section#services
+						h2.title Services
+						.module
+							h4.title Project Roadmapping
+							p Suspendisse condimentum blandit dolor, a venenatis dolor ornare id. Ut egestas rhoncus ante. Integer sed bibendum quam. Nunc est purus, porta nec faucibus sed, dictum non velit. Vestibulum porta felis eget mi aliquet malesuada.
+						.module
+							h4.title Frontend Developer
+							p Duis ut lacinia orci. Maecenas eleifend, felis a fermentum laoreet, justo lectus ultricies metus, sed maximus nisl turpis sed elit
+						.module
+							h4.title Product Maintenance
+							p Nunc vulputate urna nibh, eget luctus est laoreet ac. Quisque vel sem vitae ex rutrum vulputate vitae mattis nulla. Morbi convallis vel sapien eu commodo. Proin sagittis tellus eros, egestas semper est rhoncus sed. Cras luctus ligula et lectus euismod, non viverra diam rutrum.
+					section#work
+						h2.title Work
+						.module
+							h4.title Northwestern Memorial
+							h5.title Senior Frontend Developer
+							p Northwestern Memorial's Intranet averages over a thousand concurrent users during business hours and has thousands of pages integrating several Content Management Systems and hundreds of third-party applications.
+							p I crafted a semantic, scalable frontend codebase with powerful dev utilities and testing suites. I developed responsive layouts, modular components, and togglable theming.
+						.module
+							h4.title Conversion Fly
+							h5.title Frontend Developer
+							p Conversion Fly is a sales funnel management service. I overhauled their product's frontend codebase, developing responsive layouts, rich user interactions, and graphic displays alongside two backend developers.
+							a.btn-link(href='https://conversionfly.com/get-started') Product Demo
+						.module
+							h4.title Heeldrop
+							h5.title Frontend Developer
+							p Heeldrop is a luxury fashion rental service guaging interest in a nationwide launch. I designed and developed a custom WordPress theme optimized for A/B testing and capable of collecting, storing, and contacting a mailing list.
+							a.btn-link(href='http://heeldrop.com/') Visit Heeldrop
+						.module
+							h4.title RVillage
+							h5.title Frontend Developer, Designer
+							p RVillage is the world's largest social network for Recreational Vehicle enthusiasts. They face unique obstacles to growth, as their primary demographic is retirees using rural mobile connections.
+							p I designed and developed an intuitive landing page with large fonts and clear instructions. To improve performance in the browser, I optimized asset delivery and replaced several slow jQuery plugins with a combination of CSS3 and vanilla JS, ultimately dropping the site's WebPageTest Speed Index from over 6,000 to <a href='http://www.webpagetest.org/result/160131_PA_HYY/'>less than 1,100</a>. In the three months following my landing page's launch, RVillage's bounce rate has decreased by over a third.
+							a.btn-link(href='http://www.rvillage.com/') Visit RVillage
+					section#contact
+						h2.title-section Contact
+						.module
+							h5.title
 		include _foot.jade

@@ -7,8 +7,11 @@
 @import "mixins";
 
 // vendor dependencies
-@import "bootstrap";
+@import "vendor/module";
 
 // index css
 @import "index";
+
+// nav
+@import "navigation";
 

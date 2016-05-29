@@ -7,23 +7,72 @@
 		<meta name="author" content=""/>
 		<title>Ryan Taylor</title>
 		<link href="css/main.css" rel="stylesheet"/>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,400italic" rel="stylesheet" type="text/css"/>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
 	</head>
-	<body>
-		<div class="page-wrapper">
+	<body data-spy="scroll" data-target="#topNav" data-offset="50">
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" data-toggle="collapse" data-target="#topNav" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand">Ryan Taylor</a>
+				</div>
+				<div id="topNav" class="collapse navbar-collapse">
+					<div class="social-wrapper"><a href=""><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></a><a href="" class="hidden-md hidden-lg"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-phone fa-stack-1x fa-inverse"></i></span></a><a href=""><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-skype fa-stack-1x fa-inverse"></i></span></a><a href=""><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a><a href=""><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x fa-inverse"></i></span></a></div>
+					<ul class="nav navbar-nav">
+						<li><a href="#services">Services</a></li>
+						<li><a href="#work">Work</a></li>
+						<li><a href="#contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
 			<div class="content-wrapper">
 				<div class="main-content">
-					<section>
-						<h2 class="title-section">Services</h2>
-						<div class="service">
+					<section id="services">
+						<h2 class="title">Services</h2>
+						<div class="module">
 							<h4 class="title">Project Roadmapping</h4>
+							<p>Suspendisse condimentum blandit dolor, a venenatis dolor ornare id. Ut egestas rhoncus ante. Integer sed bibendum quam. Nunc est purus, porta nec faucibus sed, dictum non velit. Vestibulum porta felis eget mi aliquet malesuada.</p>
 						</div>
-						<div class="service">
-							<h4 class="title">Front End Architecture</h4>
-							<p> </p>
+						<div class="module">
+							<h4 class="title">Frontend Developer</h4>
+							<p>Duis ut lacinia orci. Maecenas eleifend, felis a fermentum laoreet, justo lectus ultricies metus, sed maximus nisl turpis sed elit</p>
 						</div>
-						<div class="service">
-							<h4 class="title">Emergency & Ongoing Maintenance</h4>
-							<p> </p>
+						<div class="module">
+							<h4 class="title">Product Maintenance</h4>
+							<p>Nunc vulputate urna nibh, eget luctus est laoreet ac. Quisque vel sem vitae ex rutrum vulputate vitae mattis nulla. Morbi convallis vel sapien eu commodo. Proin sagittis tellus eros, egestas semper est rhoncus sed. Cras luctus ligula et lectus euismod, non viverra diam rutrum.</p>
+						</div>
+					</section>
+					<section id="work">
+						<h2 class="title">Work</h2>
+						<div class="module">
+							<h4 class="title">Northwestern Memorial</h4>
+							<h5 class="title">Senior Frontend Developer</h5>
+							<p>Northwestern Memorial's Intranet averages over a thousand concurrent users during business hours and has thousands of pages integrating several Content Management Systems and hundreds of third-party applications.</p>
+							<p>I crafted a semantic, scalable frontend codebase with powerful dev utilities and testing suites. I developed responsive layouts, modular components, and togglable theming.</p>
+						</div>
+						<div class="module">
+							<h4 class="title">Conversion Fly</h4>
+							<h5 class="title">Frontend Developer</h5>
+							<p>Conversion Fly is a sales funnel management service. I overhauled their product's frontend codebase, developing responsive layouts, rich user interactions, and graphic displays alongside two backend developers.</p><a href="https://conversionfly.com/get-started" class="btn-link">Product Demo</a>
+						</div>
+						<div class="module">
+							<h4 class="title">Heeldrop</h4>
+							<h5 class="title">Frontend Developer</h5>
+							<p>Heeldrop is a luxury fashion rental service guaging interest in a nationwide launch. I designed and developed a custom WordPress theme optimized for A/B testing and capable of collecting, storing, and contacting a mailing list.</p><a href="http://heeldrop.com/" class="btn-link">Visit Heeldrop</a>
+						</div>
+						<div class="module">
+							<h4 class="title">RVillage</h4>
+							<h5 class="title">Frontend Developer, Designer</h5>
+							<p>RVillage is the world's largest social network for Recreational Vehicle enthusiasts. They face unique obstacles to growth, as their primary demographic is retirees using rural mobile connections.</p>
+							<p>I designed and developed an intuitive landing page with large fonts and clear instructions. To improve performance in the browser, I optimized asset delivery and replaced several slow jQuery plugins with a combination of CSS3 and vanilla JS, ultimately dropping the site's WebPageTest Speed Index from over 6,000 to <a href='http://www.webpagetest.org/result/160131_PA_HYY/'>less than 1,100</a>. In the three months following my landing page's launch, RVillage's bounce rate has decreased by over a third.</p><a href="http://www.rvillage.com/" class="btn-link">Visit RVillage</a>
+						</div>
+					</section>
+					<section id="contact">
+						<h2 class="title-section">Contact</h2>
+						<div class="module">
+							<h5 class="title"></h5>
 						</div>
 					</section>
 				</div>

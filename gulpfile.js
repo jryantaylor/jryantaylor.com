@@ -28,20 +28,20 @@ var paths = {
 	scripts: {
 		src: [
 		// vendor js
-			// './vendor/javascripts/bootstrap/affix.js',
-			// './vendor/javascripts/bootstrap/alert.js',
-			// './vendor/javascripts/bootstrap/button.js',
-			// './vendor/javascripts/bootstrap/carousel.js',
-			// './vendor/javascripts/bootstrap/collapse.js',
-			// './vendor/javascripts/bootstrap/dropdown.js',
-			// './vendor/javascripts/bootstrap/modal.js',
-			'./vendor/javascripts/bootstrap/scrollspy.js',
-			// './vendor/javascripts/bootstrap/tab.js',
-			// './vendor/javascripts/bootstrap/tooltip.js',
+			// './javascripts/vendor/bootstrap/affix.js',
+			// './javascripts/vendor/bootstrap/alert.js',
+			// './javascripts/vendor/bootstrap/button.js',
+			// './javascripts/vendor/bootstrap/carousel.js',
+			'./javascripts/vendor/bootstrap/collapse.js',
+			// '.javascripts/vendor/bootstrap/dropdown.js',
+			// '.javascripts/vendor/bootstrap/modal.js',
+			'./javascripts/vendor/bootstrap/scrollspy.js',
+			// '.javascripts/vendor/bootstrap/tab.js',
+			// './javascripts/vendor/bootstrap/tooltip.js',
 		// popover.js requires tooltip.js
-			// './vendor/javascripts/bootstrap/popover.js',
-			// './vendor/javascripts/bootstrap/transition.js',
-		// site js with jQuery/bootstrap dependencies
+			// './javascripts/vendor/bootstrap/popover.js',
+			'./javascripts/vendor/bootstrap/transition.js',
+		// site js with jQuery/vendor dependencies
 			'./javascripts/main.js',
 			],
 		dest: "./dist/js",

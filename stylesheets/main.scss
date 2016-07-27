@@ -2,16 +2,11 @@
 // main stylesheet
 // ==========================================================================
 
-// utilities
-@import "vars";
+// site mixins
 @import "mixins";
 
-// vendor dependencies
-@import "vendor/module";
+// vendor
+@import "./node_modules/normalize.scss/normalize.scss";
 
-// index css
-@import "index";
-
-// nav
-@import "navigation";
-
+// global site stylesheet
+@import "global";

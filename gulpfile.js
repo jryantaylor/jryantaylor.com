@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var gulpif = require('gulp-if');
 var watch = require("gulp-watch");
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
@@ -6,98 +7,84 @@ var jade = require("gulp-jade");
 var concat = require('gulp-concat');
 var plumber = require("gulp-plumber");
 var uglify = require('gulp-uglify');
-var browserSync = require('browser-sync').create();
 var sourcemaps = require('gulp-sourcemaps');
 var gzip = require('gulp-gzip');
+var webpagetest = require('gulp-webpagetest');
+var del = require('del');
+var cleanCSS = require('gulp-clean-css');
 
 var paths = {
 	styles: {
 		src: [
 			"./stylesheets/*.scss",
-			"./stylesheets/*/*.scss",
-			"./stylesheets/*/*/*.scss"
+			// "./stylesheets/**/*.scss",
+			// "./stylesheets/**/**/*.scss",
+			// "./stylesheets/**/**/**/*.scss"
 			],
-		dest: "./dist/css"
+		dest: "./css"
 	},
 	templates: {
 		src: [
-			"./templates/*.jade",
+			"./templates/*.jade"
 			],
-		dest: "./dist/"
-	},
-	scripts: {
-		src: [
-		// vendor js
-			// './javascripts/vendor/bootstrap/affix.js',
-			// './javascripts/vendor/bootstrap/alert.js',
-			// './javascripts/vendor/bootstrap/button.js',
-			// './javascripts/vendor/bootstrap/carousel.js',
-			'./javascripts/vendor/bootstrap/collapse.js',
-			// '.javascripts/vendor/bootstrap/dropdown.js',
-			// '.javascripts/vendor/bootstrap/modal.js',
-			'./javascripts/vendor/bootstrap/scrollspy.js',
-			// '.javascripts/vendor/bootstrap/tab.js',
-			// './javascripts/vendor/bootstrap/tooltip.js',
-		// popover.js requires tooltip.js
-			// './javascripts/vendor/bootstrap/popover.js',
-			'./javascripts/vendor/bootstrap/transition.js',
-		// site js with jQuery/vendor dependencies
-			'./javascripts/main.js',
-			],
-		dest: "./dist/js",
-	},
+		dest: "./"
+	}
 };
 
-gulp.task('browserSync', function() {
-	browserSync.init({
-		server: {
-			baseDir: 'dist'
-		},
-	})
-});
-
+// styles
 gulp.task('styles', function() {
 	return gulp.src(paths.styles.src)
-		.pipe(plumber())
 		.pipe(sourcemaps.init())
-		.pipe(sass())
+		.pipe(sass({
+			outputStyle: 'compressed'
+		}))
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions'],
 			cascade: false
 		}))
-		.pipe(sourcemaps.write())
+		// .pipe(sourcemaps.write())
+        .pipe(cleanCSS({compatibility: 'ie10'}))
+		.pipe(gzip())
 		.pipe(gulp.dest(paths.styles.dest))
-		.pipe(browserSync.reload({
-			stream: true
-		}))
 });
 
+// templates
 gulp.task("templates", function() {
 	gulp.src('./templates/*.jade')
 		.pipe(plumber())
 		.pipe(jade({
-			pretty: '\t'    // Set to false to minify/uglify
+			pretty: '\t'
 		}))
 		.pipe(plumber.stop())
+		.pipe(gzip())
 		.pipe(gulp.dest(paths.templates.dest))
-		.pipe(browserSync.reload({
-			stream: true
-		}))
 });
 
-gulp.task('scripts', function() {
-	return gulp.src(paths.scripts.src)
-	.pipe(concat('main.js'))
-	.pipe(sourcemaps.write())
-	// .pipe(uglify())
-	.pipe(gulp.dest(paths.scripts.dest))
-	.pipe(browserSync.reload({
-		stream: true
-	}))
+// clean:dist
+gulp.task('clean:dist', function () {
+	return del([
+		'./dist',
+	]);
 });
- 
-gulp.task("default", ['browserSync'], function() {
+
+// webpagetest
+gulp.task('webpagetest', webpagetest({
+  url: 'http://jryantaylor.com',
+  key: 'A.feeac109bfed923629d9639b762cebeb',
+  location: 'Dulles:Chrome',
+  firstViewOnly: true,
+  output: 'test/results.json',
+  budget: {
+    SpeedIndex: 1000,
+    visualComplete: 1000
+  },
+  callback: function() {
+    console.log('WPT test done !');
+  }
+}));
+
+// watch
+gulp.task("default", function() {
 	gulp.watch(paths.styles.src, ["styles"]);
 	gulp.watch(paths.templates.src, ["templates"]);
-	gulp.watch(paths.scripts.src, ["scripts"]);
 });

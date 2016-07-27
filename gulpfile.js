@@ -53,10 +53,10 @@ gulp.task("templates", function() {
 	gulp.src('./templates/*.jade')
 		.pipe(plumber())
 		.pipe(jade({
-			pretty: '\t'
+			pretty: '\f'
 		}))
 		.pipe(plumber.stop())
-		.pipe(gzip())
+		// .pipe(gzip())
 		.pipe(gulp.dest(paths.templates.dest))
 });
 

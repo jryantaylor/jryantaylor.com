@@ -44,7 +44,7 @@ gulp.task('styles', function() {
 		}))
 		// .pipe(sourcemaps.write())
         .pipe(cleanCSS({compatibility: 'ie10'}))
-		.pipe(gzip())
+		// .pipe(gzip())
 		.pipe(gulp.dest(paths.styles.dest))
 });
 

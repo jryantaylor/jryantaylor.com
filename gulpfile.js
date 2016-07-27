@@ -34,7 +34,7 @@ var paths = {
 // styles
 gulp.task('styles', function() {
 	return gulp.src(paths.styles.src)
-		.pipe(sourcemaps.init())
+		// .pipe(sourcemaps.init())
 		.pipe(sass({
 			outputStyle: 'compressed'
 		}))
@@ -69,7 +69,7 @@ gulp.task('clean:dist', function () {
 
 // webpagetest
 gulp.task('webpagetest', webpagetest({
-  url: 'http://jryantaylor.com',
+  url: 'http://www.jryantaylor.com',
   key: 'A.feeac109bfed923629d9639b762cebeb',
   location: 'Dulles:Chrome',
   firstViewOnly: true,

@@ -12,6 +12,12 @@ var gzip = require('gulp-gzip');
 var webpagetest = require('gulp-webpagetest');
 var del = require('del');
 var cleanCSS = require('gulp-clean-css');
+var inline = require('gulp-inline-css');
+var uncss = require('gulp-uncss');
+
+//
+// paths
+//
 
 var paths = {
 	styles: {
@@ -33,7 +39,11 @@ var paths = {
 	}
 };
 
+
+//
 // styles
+//
+
 gulp.task('styles', function() {
 	return gulp.src(paths.styles.src)
 		// .pipe(sourcemaps.init())
@@ -46,11 +56,17 @@ gulp.task('styles', function() {
 		}))
 		// .pipe(sourcemaps.write())
         .pipe(cleanCSS({compatibility: 'ie10'}))
-		// .pipe(gzip())
+		.pipe(uncss({
+            html: ['./index.html']
+        }))
 		.pipe(gulp.dest(paths.styles.dest))
 });
 
+
+//
 // templates
+//
+
 gulp.task("templates", function() {
 	gulp.src('./templates/*.jade')
 		.pipe(plumber())
@@ -58,18 +74,41 @@ gulp.task("templates", function() {
 			pretty: '\t'
 		}))
 		.pipe(plumber.stop())
-		// .pipe(gzip())
 		.pipe(gulp.dest(paths.templates.dest))
 });
 
+
+//
+// inline css
+//
+
+gulp.task('inline', function() {
+    return gulp.src('./index.html')
+        .pipe(inline({
+			applyStyleTags: true,
+			applyLinkTags: true,
+			removeStyleTags: true,
+			removeLinkTags: true
+        }))
+        .pipe(gulp.dest('./'));
+});
+
+
+//
 // clean:dist
+//
+
 gulp.task('clean:dist', function () {
 	return del([
 		'./dist',
 	]);
 });
 
+
+//
 // webpagetest
+//
+
 gulp.task('webpagetest', webpagetest({
   url: 'http://jryantaylor.com',
   key: 'A.feeac109bfed923629d9639b762cebeb',
@@ -85,7 +124,11 @@ gulp.task('webpagetest', webpagetest({
   }
 }));
 
+
+//
 // watch
+//
+
 gulp.task("default", function() {
 	gulp.watch(paths.styles.src, ["styles"]);
 	gulp.watch(paths.templates.src, ["templates"]);

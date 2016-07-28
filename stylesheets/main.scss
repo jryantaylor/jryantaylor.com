@@ -1,6 +1,27 @@
 // ==========================================================================
 // main stylesheet
 // ==========================================================================
+body {
+	font-family:
+	  // Safari for OS X and iOS (San Francisco)
+	  -apple-system,
+	  // Chrome for OS X (San Francisco)
+	  BlinkMacSystemFont,
+	  // Windows
+	  "Segoe UI",
+	  // Android
+	  "Roboto",
+	  // Linux
+	  "Oxygen", // KDE
+	  "Ubuntu",
+	  "Cantarell", // GNOME
+	  // Firefox OS [R.I.P.]
+	  "Fira Sans",
+	  // Older Android
+	  "Droid Sans",
+	  // Basic web fallback
+	  "Helvetica Neue", Arial, sans-serif;
+}
 
 // site mixins
 @import "mixins";

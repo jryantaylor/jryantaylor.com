@@ -69,7 +69,7 @@ gulp.task('clean:dist', function () {
 
 // webpagetest
 gulp.task('webpagetest', webpagetest({
-  url: 'http://www.jryantaylor.com',
+  url: 'http://jryantaylor.com',
   key: 'A.feeac109bfed923629d9639b762cebeb',
   location: 'Dulles:Chrome',
   firstViewOnly: true,

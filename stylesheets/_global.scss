@@ -7,6 +7,21 @@ body {
 	line-height: 1.4;
 }
 
+a {
+	text-decoration: none;
+	color: $brand-primary;
+
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
+}
+
+::selection {
+	color: $white;
+	background-color: $brand-primary;
+}
+
 article {
 	@include absolute-centerer;
 
@@ -18,11 +33,5 @@ article {
 
 	a {
 		display: block;
-		text-decoration: none;
-
-		&:hover,
-		&:focus {
-			text-decoration: underline;
-		}
 	}
 }

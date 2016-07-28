@@ -16,7 +16,7 @@ var cleanCSS = require('gulp-clean-css');
 var paths = {
 	styles: {
 		src: [
-			"./stylesheets/*.scss",
+			"./stylesheets/main.scss",
 			// "./stylesheets/**/*.scss",
 			// "./stylesheets/**/**/*.scss",
 			// "./stylesheets/**/**/**/*.scss"
@@ -25,7 +25,9 @@ var paths = {
 	},
 	templates: {
 		src: [
-			"./templates/*.jade"
+			"./templates/*.jade",
+			"!./templates/_head.jade",
+			"!./templates/_foot.jade"
 			],
 		dest: "./"
 	}
@@ -53,7 +55,7 @@ gulp.task("templates", function() {
 	gulp.src('./templates/*.jade')
 		.pipe(plumber())
 		.pipe(jade({
-			pretty: '\f'
+			pretty: '\t'
 		}))
 		.pipe(plumber.stop())
 		// .pipe(gzip())

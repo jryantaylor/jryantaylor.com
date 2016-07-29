@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
+var gutil = require('gulp-util');
 var watch = require("gulp-watch");
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
@@ -14,6 +15,7 @@ var del = require('del');
 var cleanCSS = require('gulp-clean-css');
 var inline = require('gulp-inline-css');
 var uncss = require('gulp-uncss');
+var favicons = require('gulp-favicons');
 
 //
 // paths
@@ -102,6 +104,40 @@ gulp.task('clean:dist', function () {
 	return del([
 		'./dist',
 	]);
+});
+
+
+//
+// favicons
+//
+
+gulp.task("favicons", function () {
+    return gulp.src("logo.png").pipe(favicons({
+        background: "#fff",
+        path: "favicons/",
+        url: "http://jryantaylor.com/",
+        orientation: "portrait",
+        version: 1.0,
+        logging: true,
+        online: false,
+        html: "./_favicons.html",
+        pipeHTML: true,
+        replace: true,
+        icons: {
+            android: false,
+            appleIcon: false,
+            appleStartup: false,
+            coast: false,
+            favicons: true,
+            firefox: false,
+            opengraph: false,
+            twitter: false,
+            windows: false,
+            yandex: false
+        }
+    }))
+    .on("error", gutil.log)
+    .pipe(gulp.dest("./favicons/"));
 });
 
 

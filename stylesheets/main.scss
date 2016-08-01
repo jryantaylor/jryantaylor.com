@@ -1,7 +1,18 @@
 // ==========================================================================
 // main stylesheet
 // ==========================================================================
-body {
+
+// site mixins
+@import "mixins";
+
+// variables
+@import "vars";
+
+// vendor
+@import "./node_modules/normalize.scss/normalize.scss";
+
+// font stack
+html {
 	font-family:
 	  // Safari for OS X and iOS (San Francisco)
 	  -apple-system,
@@ -22,15 +33,6 @@ body {
 	  // Basic web fallback
 	  "Helvetica Neue", Arial, sans-serif;
 }
-
-// site mixins
-@import "mixins";
-
-// variables
-@import "vars";
-
-// vendor
-@import "./node_modules/normalize.scss/normalize.scss";
 
 // global site stylesheet
 @import "global";

@@ -59,9 +59,29 @@ gulp.task('styles', function() {
 		// .pipe(sourcemaps.write())
         .pipe(cleanCSS({compatibility: 'ie10'}))
 		.pipe(uncss({
-            html: ['./index.html']
+            html: ['./index.html'],
+            ignore: [
+            	'@font-face',
+            	'::selection'
+            ]
         }))
 		.pipe(gulp.dest(paths.styles.dest))
+});
+
+
+//
+// inline css
+//
+
+gulp.task('inline', function() {
+    return gulp.src('./index.html')
+        .pipe(inline({
+			applyStyleTags: true,
+			applyLinkTags: true,
+			removeStyleTags: false,
+			removeLinkTags: true
+        }))
+        .pipe(gulp.dest('./'));
 });
 
 
@@ -77,22 +97,6 @@ gulp.task("templates", function() {
 		}))
 		.pipe(plumber.stop())
 		.pipe(gulp.dest(paths.templates.dest))
-});
-
-
-//
-// inline css
-//
-
-gulp.task('inline', function() {
-    return gulp.src('./index.html')
-        .pipe(inline({
-			applyStyleTags: true,
-			applyLinkTags: true,
-			removeStyleTags: true,
-			removeLinkTags: true
-        }))
-        .pipe(gulp.dest('./'));
 });
 
 

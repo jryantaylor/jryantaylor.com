@@ -1,7 +1,7 @@
 {
   "scripts": {
     "build": "gulp templates && gulp styles && gulp inline",
-    "speedtest": "psi jryantaylor.com --strategy=mobile && psi jryantaylor.com --strategy=mobile && gulp webpagetest"
+    "speedtest": "psi jryantaylor.com --strategy=mobile && psi jryantaylor.com --strategy=desktop"
   },
   "devDependencies": {
     "connect-gzip-static": "^1.0.0",

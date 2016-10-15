@@ -44,4 +44,11 @@ article {
 	@include absolute-centerer;
 
 	width: auto;
+
+	h4 {
+		margin: 0;
+		font-size: 18px;
+		line-height: 1.4;
+		font-weight: normal;
+	}
 }

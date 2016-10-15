@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "dev": "gulp clean:dist && gulp --env='dev' templates && gulp --env='dev' styles favicon",
-    "prod": "gulp clean:dist && gulp --env='prod' templates && gulp --env='prod' styles favicon && gulp inline && gulp clean:css",
+    "dev": "gulp clean:docs && gulp --env='dev' templates && gulp --env='dev' styles favicon",
+    "prod": "gulp clean:docs && gulp --env='prod' templates && gulp --env='prod' styles favicon && gulp inline && gulp clean:css",
     "speedtest": "psi jryantaylor.com --strategy=mobile && psi jryantaylor.com --strategy=desktop"
   },
   "devDependencies": {

@@ -29,18 +29,18 @@ var htmlmin = require('gulp-htmlmin');
 var paths = {
 	styles: {
 		src: "./stylesheets/*.scss",
-		dest: "./dist/css"
+		dest: "./docs/css"
 	},
 	templates: {
 		src: {
 			watch: ["./templates/*.jade"],
 			build: ["./templates/index.jade"]
 		},
-		dest: "./dist/"
+		dest: "./docs/"
 	},
 	favicon: {
 		src: './favicon.ico',
-		dest: './dist'
+		dest: './docs'
 	}
 };
 
@@ -71,7 +71,7 @@ gulp.task('styles', function() {
   //           ]
   //       }) : gutil.noop())
         .pipe(gutil.env.env === 'prod' ? purify(
-        	['./dist/js/*.js','./dist/*.html'],
+        	['./docs/js/*.js','./docs/*.html'],
         	{ info: true, rejected: true}) : gutil.noop())
 		.pipe(gulp.dest(paths.styles.dest))
 });
@@ -100,7 +100,7 @@ gulp.task("templates", function() {
 //
 
 gulp.task('inline', function() {
-    return gulp.src('./dist/index.html')
+    return gulp.src('./docs/index.html')
         .pipe(inline({
 			applyStyleTags: true,
 			applyLinkTags: true,
@@ -116,15 +116,15 @@ gulp.task('inline', function() {
 // clean tasks
 //
 
-gulp.task('clean:dist', function () {
+gulp.task('clean:docs', function () {
 	return del([
-		'./dist',
+		'./docs',
 	]);
 });
 
 gulp.task('clean:css', function () {
 	return del([
-		'./dist/css',
+		'./docs/css',
 	]);
 });
 

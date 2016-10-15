@@ -7,5 +7,5 @@ app.use((req, res, next) => {
 	next();
 })
 
-app.use(gzipStatic('./dist'));
+app.use(gzipStatic('./docs'));
 app.listen(3000);

@@ -1,6 +1,10 @@
+//
+// dependencies
+//
+
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
+var gulpif = require('gulp-if');
 var watch = require("gulp-watch");
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
@@ -15,7 +19,8 @@ var del = require('del');
 var cleanCSS = require('gulp-clean-css');
 var inline = require('gulp-inline-css');
 var uncss = require('gulp-uncss');
-var favicons = require('gulp-favicons');
+var purify = require('gulp-purifycss');
+var htmlmin = require('gulp-htmlmin');
 
 //
 // paths
@@ -23,23 +28,22 @@ var favicons = require('gulp-favicons');
 
 var paths = {
 	styles: {
-		src: [
-			"./stylesheets/main.scss",
-			// "./stylesheets/**/*.scss",
-			// "./stylesheets/**/**/*.scss",
-			// "./stylesheets/**/**/**/*.scss"
-			],
-		dest: "./css"
+		src: "./stylesheets/*.scss",
+		dest: "./dist/css"
 	},
 	templates: {
-		src: [
-			"./templates/*.jade",
-			"!./templates/_head.jade",
-			"!./templates/_foot.jade"
-			],
-		dest: "./"
+		src: {
+			watch: ["./templates/*.jade"],
+			build: ["./templates/index.jade"]
+		},
+		dest: "./dist/"
+	},
+	favicon: {
+		src: './favicon.ico',
+		dest: './dist'
 	}
 };
+
 
 
 //
@@ -48,41 +52,30 @@ var paths = {
 
 gulp.task('styles', function() {
 	return gulp.src(paths.styles.src)
-		// .pipe(sourcemaps.init())
+		.pipe(gutil.env.env === 'dev' ? sourcemaps.init() : gutil.noop())
 		.pipe(sass({
 			outputStyle: 'compressed'
 		}))
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions'],
-			cascade: false
+			cascade: false,
+			remove: false
 		}))
-		// .pipe(sourcemaps.write())
-        .pipe(cleanCSS({compatibility: 'ie10'}))
-		.pipe(uncss({
-            html: ['./index.html'],
-            ignore: [
-            	'@font-face',
-            	'::selection'
-            ]
-        }))
+		.pipe(gutil.env.env === 'dev' ? sourcemaps.write('./maps') : gutil.noop())
+        .pipe(gutil.env.env === 'prod' ? cleanCSS({compatibility: 'ie10'}) : gutil.noop())
+		// .pipe(gutil.env.env === 'prod' ? uncss({
+  //           html: ['./index.html'],
+  //           ignore: [
+  //           	'@font-face',
+  //           	'::selection'
+  //           ]
+  //       }) : gutil.noop())
+        .pipe(gutil.env.env === 'prod' ? purify(
+        	['./dist/js/*.js','./dist/*.html'],
+        	{ info: true, rejected: true}) : gutil.noop())
 		.pipe(gulp.dest(paths.styles.dest))
 });
 
-
-//
-// inline css
-//
-
-gulp.task('inline', function() {
-    return gulp.src('./index.html')
-        .pipe(inline({
-			applyStyleTags: true,
-			applyLinkTags: true,
-			removeStyleTags: false,
-			removeLinkTags: true
-        }))
-        .pipe(gulp.dest('./'));
-});
 
 
 //
@@ -90,18 +83,37 @@ gulp.task('inline', function() {
 //
 
 gulp.task("templates", function() {
-	gulp.src('./templates/*.jade')
+	gulp.src(paths.templates.src.build)
 		.pipe(plumber())
 		.pipe(jade({
-			pretty: '\t'
+			pretty: false
 		}))
 		.pipe(plumber.stop())
+		.pipe(gutil.env.env === 'prod' ? htmlmin({collapseWhitespace: true}) : gutil.noop())
 		.pipe(gulp.dest(paths.templates.dest))
 });
 
 
+
 //
-// clean:dist
+// inline css
+//
+
+gulp.task('inline', function() {
+    return gulp.src('./dist/index.html')
+        .pipe(inline({
+			applyStyleTags: true,
+			applyLinkTags: true,
+			removeStyleTags: false,
+			removeLinkTags: true
+        }))
+        .pipe(gulp.dest(paths.templates.dest));
+});
+
+
+
+//
+// clean tasks
 //
 
 gulp.task('clean:dist', function () {
@@ -110,38 +122,22 @@ gulp.task('clean:dist', function () {
 	]);
 });
 
+gulp.task('clean:css', function () {
+	return del([
+		'./dist/css',
+	]);
+});
+
+
 
 //
-// favicons
+// favicon
 //
 
-gulp.task("favicons", function () {
-    return gulp.src("logo.png").pipe(favicons({
-        background: "#fff",
-        path: "favicons/",
-        url: "http://jryantaylor.com/",
-        orientation: "portrait",
-        version: 1.0,
-        logging: true,
-        online: false,
-        html: "./_favicons.html",
-        pipeHTML: true,
-        replace: true,
-        icons: {
-            android: false,
-            appleIcon: false,
-            appleStartup: false,
-            coast: false,
-            favicons: true,
-            firefox: false,
-            opengraph: false,
-            twitter: false,
-            windows: false,
-            yandex: false
-        }
-    }))
-    .on("error", gutil.log)
-    .pipe(gulp.dest("./favicons/"));
+gulp.task('favicon', function() {
+	return gulp.src(paths.favicon.src)
+
+		.pipe(gulp.dest(paths.favicon.dest))
 });
 
 
@@ -169,7 +165,7 @@ gulp.task('webpagetest', webpagetest({
 // watch
 //
 
-gulp.task("default", function() {
+gulp.task('watch', function() {
 	gulp.watch(paths.styles.src, ["styles"]);
-	gulp.watch(paths.templates.src, ["templates"]);
+	gulp.watch(paths.templates.src.watch, ["templates"]);
 });

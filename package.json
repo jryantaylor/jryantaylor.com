@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "build": "gulp templates && gulp styles && gulp inline",
+    "dev": "gulp clean:dist && gulp --env='dev' templates && gulp --env='dev' styles favicon",
+    "prod": "gulp clean:dist && gulp --env='prod' templates && gulp --env='prod' styles favicon && gulp inline && gulp clean:css",
     "speedtest": "psi jryantaylor.com --strategy=mobile && psi jryantaylor.com --strategy=desktop"
   },
   "devDependencies": {
@@ -12,12 +13,13 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-clean-css": "^2.0.12",
     "gulp-concat": "^2.6.0",
-    "gulp-favicons": "^2.2.6",
     "gulp-gzip": "^1.4.0",
+    "gulp-htmlmin": "^3.0.0",
     "gulp-if": "^2.0.1",
     "gulp-inline-css": "^3.1.0",
     "gulp-jade": "^1.1.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-purifycss": "^0.2.0",
     "gulp-sass": "^2.1.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",

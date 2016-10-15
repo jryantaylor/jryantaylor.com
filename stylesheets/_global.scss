@@ -16,6 +16,11 @@ a {
 	}
 }
 
+
+//
+// selection helpers
+//
+
 ::selection {
 	color: $white;
 	background-color: $brand-primary;
@@ -26,16 +31,17 @@ a {
 	background-color: $brand-primary;
 }
 
+.user-select-all {
+	user-select: all;
+}
+
+
+//
+// article
+//
+
 article {
 	@include absolute-centerer;
 
 	width: auto;
-
-	span {
-		display: block;
-	}
-
-	a {
-		display: block;
-	}
 }

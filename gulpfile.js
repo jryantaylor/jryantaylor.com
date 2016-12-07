@@ -5,12 +5,12 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
-var watch = require("gulp-watch");
+var watch = require('gulp-watch');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
-var jade = require("gulp-jade");
+var jade = require('gulp-jade');
 var concat = require('gulp-concat');
-var plumber = require("gulp-plumber");
+var plumber = require('gulp-plumber');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var gzip = require('gulp-gzip');
@@ -28,15 +28,19 @@ var htmlmin = require('gulp-htmlmin');
 
 var paths = {
 	styles: {
-		src: "./stylesheets/*.scss",
-		dest: "./docs/css"
+		src: './stylesheets/*.scss',
+		dest: './docs/css'
 	},
 	templates: {
 		src: {
-			watch: ["./templates/*.jade"],
-			build: ["./templates/index.jade"]
+			watch: ['./templates/*.jade'],
+			build: ['./templates/index.jade']
 		},
-		dest: "./docs"
+		dest: './docs'
+	},
+	images: {
+		src: './images/*.*',
+		dest: './docs/img'
 	},
 	favicon: {
 		src: './favicon.ico',
@@ -86,7 +90,7 @@ gulp.task('styles', function() {
 // templates
 //
 
-gulp.task("templates", function() {
+gulp.task('templates', function() {
 	gulp.src(paths.templates.src.build)
 		.pipe(plumber())
 		.pipe(jade({
@@ -114,6 +118,16 @@ gulp.task('inline', function() {
         .pipe(gulp.dest(paths.templates.dest));
 });
 
+
+
+//
+// images
+//
+
+gulp.task('images', function() {
+	return gulp.src(paths.images.src)
+		.pipe(gulp.dest(paths.images.dest));
+});
 
 
 //
@@ -182,6 +196,6 @@ gulp.task('webpagetest', webpagetest({
 //
 
 gulp.task('watch', function() {
-	gulp.watch(paths.styles.src, ["styles"]);
-	gulp.watch(paths.templates.src.watch, ["templates"]);
+	gulp.watch(paths.styles.src, ['styles']);
+	gulp.watch(paths.templates.src.watch, ['templates']);
 });
